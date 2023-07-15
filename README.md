@@ -38,3 +38,13 @@ MPC实现ROS内仿真小车控制，based on [Nonlinear Model Predictive Control
 
 ## 运行
 `roslaunch mpc_ros ref_trajectory_tracking_gazebo.launch`
+
+## 其他
+在`.launch`文件中，特别修改加载机器人模型部分：
+```
+<param name="robot_description" command="$(find xacro)/xacro.py $(find servingbot_description)/urdf/servingbot.urdf.xacro" if="$(eval model == 'serving_bot')"/>
+```
+为：
+```
+<param name="robot_description" command="$(find xacro)/xacro '$(find servingbot_description)/urdf/servingbot.urdf.xacro'" if="$(eval model == 'serving_bot')"/>
+```
